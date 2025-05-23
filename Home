@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PII OPS Portal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #1a1a1a;
+      color: white;
+      transition: width 0.3s;
+      overflow: hidden;
+    }
+
+    .sidebar.collapsed {
+      width: 60px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 1.2em;
+    }
+
+    .sidebar.collapsed h2 {
+      display: none;
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: white;
+      display: block;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sidebar a:hover {
+      background-color: #333;
+    }
+
+    .main {
+      flex: 1;
+      background-color: #f4f4f4;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      background: #fff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc;
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .toggle-btn {
+      background-color: #1a1a1a;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 1em;
+      border-radius: 5px;
+    }
+
+    .box {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+
+    .map {
+      background: #ddd;
+      height: 300px;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 300px;
+      font-size: 1.2em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar">
+    <h2>PII OPS</h2>
+    <a onclick="navigate('dashboard')">Dashboard</a>
+    <a onclick="navigate('task')">Task</a>
+    <a onclick="navigate('activity')">Activity</a>
+    <a onclick="navigate('feed')">Feed</a>
+    <a onclick="navigate('place')">Place Confirm</a>
+    <a onclick="navigate('vehicle')">Vehicle Inspection</a>
+    <a onclick="navigate('logout')">Logout</a>
+  </div>
+
+  <div class="main">
+    <div class="top-bar">
+      <span>Hello, Ahmed Vaasiu Mohamed Manik - 6305 | Welcome to MPS Frontline Officer Portal</span>
+      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    </div>
+
+    <div id="content">
+      <!-- Dynamic content will be loaded here -->
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('collapsed');
+    }
+
+    function navigate(page) {
+      const content = document.getElementById('content');
+      switch (page) {
+        case 'dashboard':
+          content.innerHTML = `
+            <div class="box">
+              <h3>My Team</h3>
+              <p>Overview of your team members.</p>
+            </div>
+            <div class="box">
+              <h3>Update My Status</h3>
+              <select>
+                <option>Select Status</option>
+                <option>On Duty</option>
+                <option>Off Duty</option>
+                <option>Break</option>
+              </select>
+              <div class="map">[Map Placeholder]</div>
+            </div>`;
+          break;
+        case 'task':
+          content.innerHTML = `
+            <div class="box">
+              <h3>Task Page</h3>
+              <p>List and manage your active assignments.</p>
+            </div>`;
+          break;
+        case 'activity':
+          content.innerHTML = `
+            <div class="box">
+              <h3>Activity Log</h3>
+              <p>Recent patrol activities and reports.</p>
+            </div>`;
+          break;
+        case 'feed':
+          content.innerHTML = `
+            <div class="box">
+              <h3>Officer Feed</h3>
+              <p>News and bulletins for MPS personnel.</p>
+            </div>`;
+          break;
+        case 'place':
+          content.innerHTML = `
+            <div class="box">
+              <h3>Place Confirmation</h3>
+              <p>Confirm duty locations or checkpoints.</p>
+            </div>`;
+          break;
+        case 'vehicle':
+          content.innerHTML = `
+            <div class="box">
+              <h3>Vehicle Inspection</h3>
+              <p>Log and inspect assigned vehicles.</p>
+            </div>`;
+          break;
+        case 'logout':
+          content.innerHTML = `
+            <div class="box">
+              <h3>Logged Out</h3>
+              <p>You have been logged out. Close browser to exit securely.</p>
+            </div>`;
+          break;
+        default:
+          content.innerHTML = `<div class="box"><p>Page not found.</p></div>`;
+      }
+    }
+
+    // Load default page
+    navigate('dashboard');
+  </script>
+
+</body>
+</html>
